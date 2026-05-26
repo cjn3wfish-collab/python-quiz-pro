@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { chapters, questions } from "@/data/questions"
 
 export default function HomePage() {
@@ -33,26 +34,26 @@ export default function HomePage() {
 
             {/* buttons */}
             <div className="mt-12 flex flex-wrap gap-4">
-              <a
+              <Link
                 href="/quiz"
                 className="rounded-2xl bg-white px-8 py-4 text-base font-semibold text-black transition hover:scale-[1.02]"
               >
                 Start Quiz
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/bank"
                 className="rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-base font-medium text-white/80 backdrop-blur-md transition hover:bg-white/10"
               >
                 Chapters
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/wrong"
                 className="rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-base font-medium text-white/80 backdrop-blur-md transition hover:bg-white/10"
               >
                 Wrong Review
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -107,8 +108,8 @@ export default function HomePage() {
 
             {/* bottom info */}
             <div className="mt-10 flex items-center justify-between border-t border-white/10 pt-6 text-sm text-white/40">
-              <div>{chapters.length} Chapters</div>
-              <div>{questions.length} Questions</div>
+              <div>{chapters?.length || 0} Chapters</div>
+              <div>{questions?.length || 0} Questions</div>
             </div>
           </div>
         </div>
