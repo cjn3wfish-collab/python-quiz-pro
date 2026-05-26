@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { Suspense, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { questions } from "@/data/questions"
@@ -45,7 +45,8 @@ function readWrongIds() {
   }
 }
 
-export default function QuizPage() {
+// 抽离出来的核心测验组件
+function QuizContent() {
   const searchParams = useSearchParams()
 
   const urlChapter = searchParams.get("chapter")
@@ -619,5 +620,20 @@ export default function QuizPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+// 默认导出的页面组件，用 Suspense 包裹核心组件
+export default function QuizPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#080b14] text-white flex items-center justify-center">
+          <div className="text-xl text-white/50">Loading Quiz...</div>
+        </div>
+      }
+    >
+      <QuizContent />
+    </Suspense>
   )
 }
